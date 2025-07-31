@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: victim-pod
+spec:
+  containers:
+  - name: victim-pod
+    image: diegoall1990/falco-workshop:0.0.1
+    securityContext:
+      privileged: true
+      capabilities:
+        add:
+        - CAP_DAC_OVERRIDE
+        - CAP_SYS_ADMIN
+    stdin: true
+    tty: true
+    command: ["/bin/bash"]
+
+# kubectl run -i --tty --privileged --image diegoall1990/falco-workshop:0.0.1 victim
